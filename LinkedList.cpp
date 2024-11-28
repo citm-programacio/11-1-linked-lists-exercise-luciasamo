@@ -50,7 +50,7 @@ private:
 	unsigned int num_elems = 0;
 
 };
-
+//constructot
 List::List() {}
 
 // Destructor
@@ -138,13 +138,13 @@ int main()
 	list.insert(0, 5);  // Insert at the beginning
 	list.print();
 
-	list.insert(1, 7);  // Insert at position 1
+	list.insert(2, 4);  // Insert at position 1
 	list.print();
 
-	list.insert(2, 8);  // Insert at position 2
+	list.insert(1, 6);  // Insert at position 2
 	list.print();
 
-	list.insert(3, 12); // Insert at position 3
+	list.insert(8, 11); // Insert at position 3
 	list.print();
 
 	return 0;
