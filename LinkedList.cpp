@@ -35,6 +35,7 @@ public:
 	bool empty() const;
 	unsigned int size() const;
 
+	void print() const;
 private:
 	// Internal struct for list nodes
 	struct Node {
@@ -47,9 +48,19 @@ private:
 	Node* first = nullptr;
 	Node* last = nullptr;
 	unsigned int num_elems = 0;
+
 };
 
-void push_back(const int &value) {
+List::List() {}
+
+// Destructor
+List::~List() {
+	clear();
+}
+
+
+
+void List::push_back(const int &value) {
 	Node* new_node = new Node;
 	new_node->value = value;
 	new_node->next = nullptr;
@@ -67,12 +78,52 @@ void push_back(const int &value) {
 	num_elems++;
 }
 
-void insert(unsigned int position, const int& value) {
+void List::insert(unsigned int position, const int& value) {
+	if (position > num_elems) {
+		cout << "Position out of bounds!" << endl;
+		return;
+	}
 
+	if (position == num_elems) {
+		push_back(value);
+		return;
+	}
+
+	Node* new_node = new Node;
+	new_node->value = value;
+
+	if (position == 0) {
+		new_node->next = first;
+		new_node->prev = nullptr;
+		if (first != nullptr) {
+			first->prev = new_node;
+		}
+		first = new_node;
+	}
+	else {
+		Node* current = first;
+		for (unsigned int i = 0; i < position; ++i) {
+			current = current->next;
+		}
+
+		new_node->next = current;
+		new_node->prev = current->prev;
+		if (current->prev != nullptr) {
+			current->prev->next = new_node;
+		}
+		current->prev = new_node;
+	}
+
+	num_elems++;
 }
 
-void print() {
-
+void List :: print() const {
+	Node* current = first;
+	while (current != nullptr) {
+		cout << current->value << " ";
+		current = current->next;
+	}
+	cout << endl;
 }
 
 
